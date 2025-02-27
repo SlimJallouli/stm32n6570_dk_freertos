@@ -22,6 +22,8 @@
 #include "stm32n6xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "FreeRTOS.h"
+#include "task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -175,5 +177,20 @@ void DebugMon_Handler(void)
 /******************************************************************************/
 
 /* USER CODE BEGIN 1 */
+#if (USE_CUSTOM_SYSTICK_HANDLER_IMPLEMENTATION == 1)
+// Use SysTick as OS Tick and HAL Tick. No need to have 2 x 1ms interrupts.
+#if defined(SysTick_Handler)
+#undef SysTick_Handler
+#endif
 
+void SysTick_Handler (void)
+{
+  if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED) {
+    /* Call tick handler */
+    xPortSysTickHandler();
+  }
+
+  HAL_IncTick();
+}
+#endif
 /* USER CODE END 1 */

@@ -1006,8 +1006,6 @@ void vPortExitCritical( void ) /* PRIVILEGED_FUNCTION */
     }
 }
 /*-----------------------------------------------------------*/
-extern void HAL_IncTick(void);
-
 void SysTick_Handler( void ) /* PRIVILEGED_FUNCTION */
 {
     uint32_t ulPreviousMask;
@@ -1032,8 +1030,6 @@ void SysTick_Handler( void ) /* PRIVILEGED_FUNCTION */
 		}
 		portCLEAR_INTERRUPT_MASK_FROM_ISR(ulPreviousMask);
 	}
-
-	HAL_IncTick();
 }
 /*-----------------------------------------------------------*/
 

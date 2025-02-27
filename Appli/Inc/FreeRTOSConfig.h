@@ -149,9 +149,10 @@ extern uint32_t SystemCoreClock;
 #define INCLUDE_xTaskGetCurrentTaskHandle     1
 
 /* Map the FreeRTOS port interrupt handlers to their CMSIS standard names. */
+void xPortSysTickHandler(void);
 #define xPortPendSVHandler                    PendSV_Handler
 #define vPortSVCHandler                       SVC_Handler
-#define xPortSysTickHandler                   SysTick_Handler
+#define SysTick_Handler                       xPortSysTickHandler
 
 #if (defined(__ARMCC_VERSION) || defined(__GNUC__) || defined(__ICCARM__))
 /* Include debug event definitions */
