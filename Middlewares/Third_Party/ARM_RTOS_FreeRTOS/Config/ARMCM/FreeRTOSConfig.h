@@ -97,7 +97,7 @@ extern uint32_t SystemCoreClock;
 #define configENABLE_FPU                      0
 #define configENABLE_TRUSTZONE                0
 #define configMINIMAL_SECURE_STACK_SIZE       ((uint32_t)1024)
-#define configRUN_FREERTOS_SECURE_ONLY        0
+#define configRUN_FREERTOS_SECURE_ONLY        1
 
 /* Cortex-M specific definitions. */
 #ifdef __NVIC_PRIO_BITS

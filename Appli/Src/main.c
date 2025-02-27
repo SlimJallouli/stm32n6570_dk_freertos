@@ -61,6 +61,7 @@ void mainTask(void *pvParameters)
     for (;;)
     {
         // Perform main task operations
+    	vTaskDelay(500);
     }
 }
 /* USER CODE END 0 */
