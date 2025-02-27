@@ -79,6 +79,8 @@ void Error_Handler(void);
 #define OSC_IN_GPIO_Port GPIOH
 #define OSC_OUT_Pin GPIO_PIN_1
 #define OSC_OUT_GPIO_Port GPIOH
+#define LED2_Pin GPIO_PIN_10
+#define LED2_GPIO_Port GPIOG
 
 /* USER CODE BEGIN Private defines */
 
