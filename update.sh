@@ -78,6 +78,7 @@ done
 
 # Remove old portable directory and copy the new one
 rm -rf "$FreeRTOS_DST_Folder/Source/portable/$COMPILER/ARM_CM33_NTZ"
-copy_file "$FreeRTOS_SRC_Folder/portable/$COMPILER/$CORE" "$FreeRTOS_DST_Folder/Source/portable/$COMPILER/"
+# copy_file "$FreeRTOS_SRC_Folder/portable/$COMPILER/$CORE" "$FreeRTOS_DST_Folder/Source/portable/$COMPILER/"
+cp -r "$FreeRTOS_SRC_Folder/portable/$COMPILER/$CORE" "$FreeRTOS_DST_Folder/Source/portable/$COMPILER/"
 
 # Copy port.c specifically to a different destination
