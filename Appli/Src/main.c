@@ -21,19 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "logging_levels.h"
-/* define LOG_LEVEL here if you want to modify the logging level from the default */
-#if defined(LOG_LEVEL)
-#undef LOG_LEVEL
-#endif
-
-#define LOG_LEVEL    LOG_DEBUG
-
-#include "logging.h"
-
-#include "FreeRTOS.h"
-#include "task.h"
-
+#include "app_freertos.h"
 
 /* USER CODE END Includes */
 
@@ -74,17 +62,7 @@ static void SystemIsolation_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void mainTask(void *pvParameters)
-{
-    // Task code goes here
-    for (;;)
-    {
-        // Perform main task operations
-    	LogInfo("LED Toggle.");
-    	HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
-    	vTaskDelay(2000);
-    }
-}
+
 /* USER CODE END 0 */
 
 /**
@@ -124,18 +102,7 @@ int main(void)
   MX_TIM5_Init();
   SystemIsolation_Config();
   /* USER CODE BEGIN 2 */
-  vInitLoggingEarly();
-
-  vLoggingInit();
-
-  LogInfo("HW Init Complete.");
-
-  xTaskCreate(mainTask, "mainTask", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);          // Task handle
-
-  if(xTaskCreate(Task_CLI, "cli", 2048, NULL, 10, NULL) == pdFALSE)
-  {
-	  __BKPT(0);
-  }
+  MX_FREERTOS_Init();
 
   // Start the scheduler
   vTaskStartScheduler();

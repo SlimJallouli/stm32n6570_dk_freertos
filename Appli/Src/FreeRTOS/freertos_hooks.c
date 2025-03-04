@@ -54,7 +54,7 @@ __weak void vApplicationIdleHook( void )
 #endif
 
 #if configUSE_MALLOC_FAILED_HOOK
-void vApplicationMallocFailedHook(void)
+__weak void vApplicationMallocFailedHook(void)
 {
 //	LogError("Malloc Fail\n");
 }
