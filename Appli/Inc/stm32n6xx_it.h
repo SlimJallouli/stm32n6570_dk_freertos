@@ -54,6 +54,7 @@ void UsageFault_Handler(void);
 void SecureFault_Handler(void);
 void DebugMon_Handler(void);
 void USART1_IRQHandler(void);
+void XSPI2_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */

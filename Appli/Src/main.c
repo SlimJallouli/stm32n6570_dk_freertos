@@ -22,7 +22,11 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "app_freertos.h"
-
+#if defined(XSPI_TEST)
+#include <string.h>
+#include <stdlib.h>
+#include "xspi_nor_mx66umxx45g.h"
+#endif
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -46,6 +50,8 @@ TIM_HandleTypeDef htim5;
 
 UART_HandleTypeDef huart1;
 
+XSPI_HandleTypeDef hxspi2;
+
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -55,6 +61,7 @@ static void MPU_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_TIM5_Init(void);
+static void MX_XSPI2_Init(void);
 static void SystemIsolation_Config(void);
 /* USER CODE BEGIN PFP */
 
@@ -100,12 +107,60 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   MX_TIM5_Init();
+  MX_XSPI2_Init();
   SystemIsolation_Config();
   /* USER CODE BEGIN 2 */
+#if defined(XSPI_TEST)
+  uint16_t index;
+  uint32_t sector = 1;
+
+#define BUFFERSIZE                  256
+
+/* Buffer used for transmission */
+uint8_t aTxBuffer[BUFFERSIZE];
+
+/* Buffer used for reception */
+uint8_t aRxBuffer[BUFFERSIZE];
+
+  for (index = 0; index < BUFFERSIZE; index++)
+    {
+      aTxBuffer[index] = rand();
+
+    }
+
+    memset(aRxBuffer, 0, BUFFERSIZE);
+
+    /* Configure the memory in octal DTR mode ----------------------------------- */
+    xspi_Init  (&hxspi2);
+
+    /* Erasing Sequence --------------------------------------------------------- */
+    xspi_EraseSector(&hxspi2, sector * MX66UM_SECTOR_SZ, MX66UM_DEFAULT_TIMEOUT_MS);
+    /* Writing Sequence --------------------------------------------------------- */
+    xspi_WriteAddr(&hxspi2, sector * MX66UM_SECTOR_SZ, aTxBuffer,BUFFERSIZE,  MX66UM_DEFAULT_TIMEOUT_MS);
+
+    /* Reading Sequence --------------------------------------------------------- */
+    xspi_ReadAddr(&hxspi2, sector * MX66UM_SECTOR_SZ, aRxBuffer, BUFFERSIZE, MX66UM_DEFAULT_TIMEOUT_MS);
+
+    /* Result comparison -------------------------------------------------------- */
+    if (memcmp(aRxBuffer, aTxBuffer, BUFFERSIZE) == 0)
+    {
+      /* Turn LED_GREEN on */
+      __BKPT(0);
+    }
+    else
+    {
+      /* Turn LED_RED on */
+       __BKPT(0);
+    }
+
+    /* DeInit XSPI */
+    HAL_XSPI_DeInit(&hxspi2);
+#else
   MX_FREERTOS_Init();
 
   // Start the scheduler
   vTaskStartScheduler();
+#endif
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -303,6 +358,57 @@ static void MX_USART1_UART_Init(void)
 }
 
 /**
+  * @brief XSPI2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_XSPI2_Init(void)
+{
+
+  /* USER CODE BEGIN XSPI2_Init 0 */
+
+  /* USER CODE END XSPI2_Init 0 */
+
+  XSPIM_CfgTypeDef sXspiManagerCfg = {0};
+
+  /* USER CODE BEGIN XSPI2_Init 1 */
+
+  /* USER CODE END XSPI2_Init 1 */
+  /* XSPI2 parameter configuration*/
+  hxspi2.Instance = XSPI2;
+  hxspi2.Init.FifoThresholdByte = 4;
+  hxspi2.Init.MemoryMode = HAL_XSPI_SINGLE_MEM;
+  hxspi2.Init.MemoryType = HAL_XSPI_MEMTYPE_MACRONIX;
+  hxspi2.Init.MemorySize = HAL_XSPI_SIZE_1GB;
+  hxspi2.Init.ChipSelectHighTimeCycle = 1;
+  hxspi2.Init.FreeRunningClock = HAL_XSPI_FREERUNCLK_DISABLE;
+  hxspi2.Init.ClockMode = HAL_XSPI_CLOCK_MODE_0;
+  hxspi2.Init.WrapSize = HAL_XSPI_WRAP_NOT_SUPPORTED;
+  hxspi2.Init.ClockPrescaler = 1;
+  hxspi2.Init.SampleShifting = HAL_XSPI_SAMPLE_SHIFT_NONE;
+  hxspi2.Init.DelayHoldQuarterCycle = HAL_XSPI_DHQC_ENABLE;
+  hxspi2.Init.ChipSelectBoundary = HAL_XSPI_BONDARYOF_NONE;
+  hxspi2.Init.MaxTran = 0;
+  hxspi2.Init.Refresh = 0;
+  hxspi2.Init.MemorySelect = HAL_XSPI_CSSEL_NCS1;
+  if (HAL_XSPI_Init(&hxspi2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sXspiManagerCfg.nCSOverride = HAL_XSPI_CSSEL_OVR_NCS1;
+  sXspiManagerCfg.IOPort = HAL_XSPIM_IOPORT_2;
+  sXspiManagerCfg.Req2AckTime = 1;
+  if (HAL_XSPIM_Config(&hxspi2, &sXspiManagerCfg, HAL_XSPI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN XSPI2_Init 2 */
+
+  /* USER CODE END XSPI2_Init 2 */
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -315,6 +421,7 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPION_CLK_ENABLE();
   __HAL_RCC_GPIOG_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */

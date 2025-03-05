@@ -58,6 +58,7 @@
 
 /* External variables --------------------------------------------------------*/
 extern UART_HandleTypeDef huart1;
+extern XSPI_HandleTypeDef hxspi2;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -188,6 +189,20 @@ void USART1_IRQHandler(void)
   /* USER CODE BEGIN USART1_IRQn 1 */
 
   /* USER CODE END USART1_IRQn 1 */
+}
+
+/**
+  * @brief This function handles XSPI2 global interrupt.
+  */
+void XSPI2_IRQHandler(void)
+{
+  /* USER CODE BEGIN XSPI2_IRQn 0 */
+
+  /* USER CODE END XSPI2_IRQn 0 */
+  HAL_XSPI_IRQHandler(&hxspi2);
+  /* USER CODE BEGIN XSPI2_IRQn 1 */
+
+  /* USER CODE END XSPI2_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

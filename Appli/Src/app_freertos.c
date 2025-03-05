@@ -41,8 +41,8 @@
 
 //#include "kvstore.h"
 
-//#include "lfs.h"
-//#include "lfs_port.h"
+#include "lfs.h"
+#include "lfs_port.h"
 
 //#include "hal_init.h"
 
@@ -212,7 +212,10 @@ void StartDefaultTask(void *argument)
 
     (void) xEventGroupSetBits(xSystemEvents, EVT_MASK_FS_READY);
 #endif
+
+#if defined(_KVSTORE_H)
     KVStore_init();
+#endif
   }
   else
   {

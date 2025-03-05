@@ -80,7 +80,7 @@ extern "C" {
 #define HAL_UART_MODULE_ENABLED
 /*#define HAL_USART_MODULE_ENABLED   */
 /*#define HAL_WWDG_MODULE_ENABLED   */
-/*#define HAL_XSPI_MODULE_ENABLED   */
+#define HAL_XSPI_MODULE_ENABLED
 /*#define HAL_CACHEAXI_MODULE_ENABLED   */
 /*#define HAL_MDIOS_MODULE_ENABLED   */
 /*#define HAL_GPU2D_MODULE_ENABLED   */
@@ -213,7 +213,7 @@ extern "C" {
 #define  USE_HAL_UART_REGISTER_CALLBACKS      1U /* UART register callback enabled      */
 #define  USE_HAL_USART_REGISTER_CALLBACKS     1U /* USART register callback enabled     */
 #define  USE_HAL_WWDG_REGISTER_CALLBACKS      0U /* WWDG register callback disabled      */
-#define  USE_HAL_XSPI_REGISTER_CALLBACKS      0U /* XSPI register callback disabled      */
+#define  USE_HAL_XSPI_REGISTER_CALLBACKS      1U /* XSPI register callback enabled      */
 
 /* ################## SPI peripheral configuration ########################## */
 
