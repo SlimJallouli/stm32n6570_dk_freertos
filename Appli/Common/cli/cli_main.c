@@ -335,7 +335,7 @@ static uint32_t prvGetNumberOfArgs( const char * pcCommandString )
 void Task_CLI( void * pvParameters )
 {
     ( void ) pvParameters;
-//    FreeRTOS_CLIRegisterCommand( &xCommandDef_conf );
+    FreeRTOS_CLIRegisterCommand( &xCommandDef_conf );
 //    FreeRTOS_CLIRegisterCommand( &xCommandDef_pki );
     FreeRTOS_CLIRegisterCommand( &xCommandDef_ps );
     FreeRTOS_CLIRegisterCommand( &xCommandDef_kill );

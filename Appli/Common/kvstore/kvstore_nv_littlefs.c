@@ -87,7 +87,7 @@
         char pcFileName[ KVSTORE_MAX_FNANME ] = { 0 };
         lfs_t * pLfsCtx = pxGetDefaultFsCtx();
         struct lfs_info xFileInfo = { 0 };
-        size_t xLength = 0;
+        int32_t xLength = 0;
 
         ( void ) strncpy( pcFileName, KVSTORE_PREFIX, KVSTORE_MAX_FNANME );
         ( void ) strncat( pcFileName, kvStoreKeyMap[ xKey ], KVSTORE_MAX_FNANME );
@@ -95,6 +95,11 @@
         if( lfs_stat( pLfsCtx, pcFileName, &xFileInfo ) == LFS_ERR_OK )
         {
             xLength = ( xFileInfo.size - sizeof( KVStoreTLVHeader_t ) );
+        }
+
+        if(xLength < 0)
+        {
+        	xLength = 0;
         }
 
         return xLength;

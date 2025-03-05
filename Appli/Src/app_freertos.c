@@ -39,7 +39,7 @@
 #include "task.h"
 #include "semphr.h"
 
-//#include "kvstore.h"
+#include "kvstore.h"
 
 #include "lfs.h"
 #include "lfs_port.h"
