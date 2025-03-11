@@ -132,7 +132,7 @@ static void vPopulateConfig( struct lfs_config * pxCfg,
  * Initializes littlefs on the internal storage of the STM32U5 without heap allocation.
  * @param xBlockTime Amount of time to wait for the flash interface lock
  */
-    const struct lfs_config * pxInitializeOSPIFlashFsStatic( TickType_t xBlockTime )
+    const struct lfs_config * pxInitializeXSPIFlashFsStatic( TickType_t xBlockTime )
     {
         xLfsCfg.context = ( void * ) &xLfsCtx;
 
@@ -150,7 +150,7 @@ static void vPopulateConfig( struct lfs_config * pxCfg,
  * Initializes littlefs on the internal storage of the STM32U5.
  * @param xBlockTime Amount of time to wait for the flash interface lock
  */
-    const struct lfs_config * pxInitializeOSPIFlashFs( TickType_t xBlockTime )
+    const struct lfs_config * pxInitializeXSPIFlashFs( TickType_t xBlockTime )
     {
         /* Allocate space for lfs_config struct */
         struct lfs_config * pxCfg = ( struct lfs_config * ) pvPortMalloc( sizeof( struct lfs_config ) );

@@ -29,10 +29,10 @@
 #include "lfs_util.h"
 
 #ifdef LFS_NO_MALLOC
-    const struct lfs_config * pxInitializeOSPIFlashFsStatic( TickType_t xBlockTime );
+    const struct lfs_config * pxInitializeXSPIFlashFsStatic( TickType_t xBlockTime );
     const struct lfs_config * pxInitializeInternalFlashFsStatic( TickType_t xBlockTime );
 #else
-    const struct lfs_config * pxInitializeOSPIFlashFs( TickType_t xBlockTime );
+    const struct lfs_config * pxInitializeXSPIFlashFs( TickType_t xBlockTime );
     const struct lfs_config * pxInitializeInternalFlashFs( TickType_t xBlockTime );
 #endif
 

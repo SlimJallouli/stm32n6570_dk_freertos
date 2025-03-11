@@ -23,6 +23,7 @@
 		<nature>org.eclipse.cdt.core.cnature</nature>
 		<nature>com.st.stm32cube.ide.mcu.MCUCubeIdeServicesRevAev2ProjectNature</nature>
 		<nature>com.st.stm32cube.ide.mcu.MCUCubeProjectNature</nature>
+		<nature>com.st.stm32cube.ide.mcu.MCUAdvancedStructureProjectNature</nature>
 		<nature>com.st.stm32cube.ide.mcu.MCUSecureProjectNature</nature>
 		<nature>com.st.stm32cube.ide.mcu.MCUAppliPythonProjectNature</nature>
 		<nature>com.st.stm32cube.ide.mcu.MCUIsSecureRefProjectNature</nature>
@@ -114,21 +115,6 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_xspi.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/STM32N6xx_HAL_Driver/stm32n6xx_ll_exti.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_ll_exti.c</locationURI>
-		</link>
-		<link>
-			<name>Drivers/STM32N6xx_HAL_Driver/stm32n6xx_ll_rcc.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_ll_rcc.c</locationURI>
-		</link>
-		<link>
-			<name>Drivers/STM32N6xx_HAL_Driver/stm32n6xx_ll_utils.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_ll_utils.c</locationURI>
-		</link>
-		<link>
 			<name>Middlewares/FreeRTOS/RTOS/Coroutines/croutine.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Middlewares/Third_Party/ARM_RTOS_FreeRTOS/Source/croutine.c</locationURI>
@@ -159,6 +145,16 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Middlewares/Third_Party/ARM_RTOS_FreeRTOS/Source/list.c</locationURI>
 		</link>
 		<link>
+			<name>Middlewares/FreeRTOS/RTOS/Core/Cortex-M/port.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Middlewares/Third_Party/ARM_RTOS_FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FreeRTOS/RTOS/Core/Cortex-M/portasm.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Middlewares/Third_Party/ARM_RTOS_FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c</locationURI>
+		</link>
+		<link>
 			<name>Middlewares/FreeRTOS/RTOS/Core/Cortex-M/queue.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Middlewares/Third_Party/ARM_RTOS_FreeRTOS/Source/queue.c</locationURI>
@@ -167,11 +163,6 @@
 			<name>Middlewares/FreeRTOS/RTOS/Core/Cortex-M/tasks.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Middlewares/Third_Party/ARM_RTOS_FreeRTOS/Source/tasks.c</locationURI>
-		</link>
-		<link>
-			<name>Middlewares/FreeRTOS/RTOS/Core/Cortex-M/timers.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Middlewares/Third_Party/ARM_RTOS_FreeRTOS/Source/timers.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/FreeRTOS/RTOS/Heap/Heap_4/heap_4.c</name>

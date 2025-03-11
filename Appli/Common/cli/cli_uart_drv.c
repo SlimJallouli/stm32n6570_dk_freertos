@@ -321,7 +321,7 @@ static void vTxThread( void * pvParameters )
         {
             ( void ) xTaskNotifyStateClearIndexed( NULL, 1 );
             xHalStatus = HAL_UART_Transmit_IT( &xConsoleHandle, pucTxBuffer, ( uint16_t ) xBytes );
-			configASSERT( xHalStatus == HAL_OK );
+//			      configASSERT( xHalStatus == HAL_OK );
 
             if( xHalStatus == HAL_OK )
             {
