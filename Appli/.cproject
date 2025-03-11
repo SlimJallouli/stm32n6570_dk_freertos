@@ -91,9 +91,6 @@
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec.1052838066" name="MCU Output Converter Motorola S-rec with symbols" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec"/>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.362146615.112661592" name="port.c" rcbsApplicability="disable" resourcePath="Middlewares/FreeRTOS/RTOS/Core/Cortex-M/port.c" toolsToInvoke="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.531570982.609489860">
-						<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.531570982.609489860" name="MCU/MPU GCC Compiler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.531570982"/>
-					</fileInfo>
 					<sourceEntries>
 						<entry excluding="sys/mbedtls_freertos_port.c|sys/hal_init.c|cli/cli_rngtest.c|cli/cli_pki.c|net|crypto|app" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Common"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Secure/FreeRTOS"/>
