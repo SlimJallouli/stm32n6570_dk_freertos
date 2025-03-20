@@ -129,7 +129,7 @@ void PeriphCommonClock_Config(void)
   /** Initializes the peripherals clock
   */
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_TIM;
-  PeriphClkInitStruct.TIMPresSelection = RCC_TIMPRES_DIV1;
+  PeriphClkInitStruct.TIMPresSelection = RCC_TIMPRES_DIV2;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
   {
     Error_Handler();
