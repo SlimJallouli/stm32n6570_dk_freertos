@@ -82,8 +82,8 @@ static void vPopulateConfig( struct lfs_config * pxCfg,
     pxCtx->xpXSPIHandle = &MX66UM_XSPI;
 
     /* Read size is one word */
-    pxCfg->read_size = 1;
-    pxCfg->prog_size = 256;
+    pxCfg->read_size = MX66UM_READ_SIZE;
+    pxCfg->prog_size = MX66UM_PROG_SIZE;
 
     /* Number of erasable blocks */
     pxCfg->block_count = ( MX66UM_MEM_SZ_USABLE / MX66UM_SECTOR_SZ );
