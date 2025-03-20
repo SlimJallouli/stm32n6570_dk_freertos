@@ -228,7 +228,8 @@ void XSPI2_IRQHandler(void)
 
 void SysTick_Handler (void)
 {
-  if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED) {
+  if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED)
+  {
     /* Call tick handler */
     xPortSysTickHandler();
   }

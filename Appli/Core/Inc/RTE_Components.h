@@ -22,7 +22,7 @@
 #define  __RTE_COMPONENTS_H__
 
 /* Defines ------------------------------------------------------------------*/
-/* ARM.CMSIS-FreeRTOS.10.4.6 */
+/* ARM.CMSIS-FreeRTOS.11.1.0 */
 #define RTE_RTOS_FreeRTOS_CORE /* RTOS FreeRTOS Core */
 #define RTE_RTOS_FreeRTOS_CONFIG /* RTOS FreeRTOS Config for FreeRTOS API */
 #define RTE_RTOS_FreeRTOS_COROUTINE /* RTOS FreeRTOS Co-routines */

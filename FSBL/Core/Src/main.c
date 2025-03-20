@@ -22,7 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <stdio.h>
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -100,7 +100,6 @@ int main(void)
   MX_EXTMEM_MANAGER_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_UART_Transmit(&huart1, "FSBL Running\r\n", sizeof("FSBL Running\r\n"), 0xFFFFFFFF);
   /* USER CODE END 2 */
 
   /* Launch the application */

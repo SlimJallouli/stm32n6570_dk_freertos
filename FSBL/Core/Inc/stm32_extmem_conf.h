@@ -111,7 +111,7 @@ EXTMEM_DefinitionTypeDef extmem_list_config[1];
  * -- Insert functions declaration here --
  */
 /* USER CODE BEGIN FD */
-
+#define EXTMEM_HEADER_OFFSET 0x400
 /* USER CODE END FD */
 
 #ifdef __cplusplus
