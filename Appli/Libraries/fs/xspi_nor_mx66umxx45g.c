@@ -3,13 +3,9 @@
 #define LOG_LEVEL    LOG_NONE
 #include "logging.h"
 #include "FreeRTOS.h"
-#include "task.h"
+//#include "task.h"
 
 #include "xspi_nor_mx66umxx45g.h"
-
-
-#include "xspi_nor_mx66umxx45g.h"
-
 
 static BaseType_t XSPI_WriteEnable        (XSPI_HandleTypeDef *pxXSPI);
 static BaseType_t XSPI_AutoPollingMemReady(XSPI_HandleTypeDef *pxXSPI);
@@ -19,49 +15,6 @@ static BaseType_t XSPI_NOR_OctalDTRModeCfg(XSPI_HandleTypeDef *pxXSPI);
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
-
-#define UART_BUFFER_SIZE 256 // Adjust this size as needed
-
-extern UART_HandleTypeDef huart1; // Replace with the appropriate UART handle
-
-static void printBufferWithAddress(uint32_t ulAddr, const void *pxBuffer, uint32_t ulBufferLen)
-{
-#if 0
-    const unsigned char *buffer = (const unsigned char *)pxBuffer;
-    char uartBuffer[UART_BUFFER_SIZE];
-    int len;
-
-//    vTaskDelay(300);
-
-    // Print the address
-    len = snprintf(uartBuffer, UART_BUFFER_SIZE, "/* Address: 0x%08X, Size:  0x%08X */\r\n", ulAddr, ulBufferLen);
-    HAL_UART_Transmit(&huart1, (uint8_t *)uartBuffer, len, HAL_MAX_DELAY);
-
-    // Start the array output
-    len = snprintf(uartBuffer, UART_BUFFER_SIZE, "unsigned char buffer[] = { ");
-    HAL_UART_Transmit(&huart1, (uint8_t *)uartBuffer, len, HAL_MAX_DELAY);
-
-    // Print each byte in the buffer
-    for (uint32_t i = 0; i < ulBufferLen; i++)
-    {
-        if (i < ulBufferLen - 1)
-        {
-            len = snprintf(uartBuffer, UART_BUFFER_SIZE, "0x%02X, ", buffer[i]);
-        }
-        else
-        {
-            len = snprintf(uartBuffer, UART_BUFFER_SIZE, "0x%02X", buffer[i]); // No comma for the last element
-        }
-
-        HAL_UART_Transmit(&huart1, (uint8_t *)uartBuffer, len, HAL_MAX_DELAY);
-    }
-
-    // End the array
-    len = snprintf(uartBuffer, UART_BUFFER_SIZE, " };\r\n");
-    HAL_UART_Transmit(&huart1, (uint8_t *)uartBuffer, len, HAL_MAX_DELAY);
-#endif
-}
-
 
 BaseType_t xspi_Init        (XSPI_HandleTypeDef *pxXSPI)
 {
@@ -108,9 +61,7 @@ BaseType_t xspi_WriteAddr   (XSPI_HandleTypeDef *pxXSPI, uint32_t ulAddr, const 
 
   LogDebug("Writing address 0x%08X, size  0x%08X",ulAddr, ulBufferLen);
 
-  configASSERT((ulBufferLen%2)==0);
-
-  printBufferWithAddress(ulAddr,pxBuffer, ulBufferLen);
+  configASSERT((ulBufferLen%MX66UM_READ_SIZE)==0);
 
   XSPI_WriteEnable(pxXSPI);
 
@@ -151,7 +102,7 @@ BaseType_t xspi_ReadAddr    (XSPI_HandleTypeDef *pxXSPI, uint32_t ulAddr, void *
   XSPI_RegularCmdTypeDef sCommand = { 0 };
 
   LogDebug("Reading address 0x%08X, size  0x%08X",ulAddr, ulBufferLen);
-  configASSERT((ulBufferLen%2)==0);
+  configASSERT((ulBufferLen%MX66UM_READ_SIZE)==0);
 
   sCommand.OperationType      = HAL_XSPI_OPTYPE_COMMON_CFG;
   sCommand.Instruction        = OPI_CMD_IO_DTR_READ;
