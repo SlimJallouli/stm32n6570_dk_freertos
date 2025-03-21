@@ -276,12 +276,14 @@ void StartDefaultTask(void *argument)
 #endif
 
 #if !defined(__USE_STSAFE__) && defined(FLEET_PROVISION_DEMO)
+#if 0
   if(provisioned == 0)
   {
     xResult = xTaskCreate(prvFleetProvisioningTask, "FleetProv", fleetProvisioning_STACKSIZE, NULL, tskIDLE_PRIORITY, NULL);
     configASSERT(xResult == pdTRUE);
   }
   else
+#endif
 #endif /* !defined(__USE_STSAFE__) && defined(FLEET_PROVISION_DEMO) */
   {
 #if DEMO_PUB_SUB
@@ -405,7 +407,41 @@ static int fs_init(void)
       LogError("Failed to create /ota directory.");
     }
   }
+#if 0
+  lfs_file_t xFile = { 0 };
+  int status = lfs_file_open ( &xLfsCtx, &xFile, "corePKCS11_Key.dat", LFS_O_RDWR | LFS_O_CREAT);
 
+  if(status == 0)
+  {
+    lfs_file_close( &xLfsCtx, &xFile );
+  }
+  else
+  {
+	__BKPT(0);
+  }
+
+  status = lfs_file_open ( &xLfsCtx, &xFile, "corePKCS11_PubKey.dat", LFS_O_RDWR | LFS_O_CREAT);
+
+  if(status == 0)
+  {
+    lfs_file_close( &xLfsCtx, &xFile );
+  }
+  else
+  {
+   __BKPT(0);
+  }
+
+  status = lfs_file_open ( &xLfsCtx, &xFile, "corePKCS11_CA_Certificate.dat", LFS_O_RDWR | LFS_O_CREAT);
+
+  if(status == 0)
+  {
+    lfs_file_close( &xLfsCtx, &xFile );
+  }
+  else
+  {
+   __BKPT(0);
+  }
+#endif
   if (err == 0)
   {
     /* Export the FS context */

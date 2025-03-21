@@ -73,6 +73,8 @@ void HAL_MspInit(void)
 
   HAL_PWREx_EnableVddIO3();
 
+  HAL_PWREx_EnableVddIO5();
+
   /* USER CODE BEGIN MspInit 1 */
 
   /* USER CODE END MspInit 1 */
@@ -215,7 +217,10 @@ void HAL_XSPI_MspInit(XSPI_HandleTypeDef* hxspi)
     HAL_NVIC_SetPriority(XSPI2_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(XSPI2_IRQn);
   /* USER CODE BEGIN XSPI2_MspInit 1 */
-
+    HAL_PWREx_EnableVddIO2();
+    HAL_PWREx_ConfigVddIORange(PWR_VDDIO2, PWR_VDDIO_RANGE_1V8);
+    HAL_PWREx_EnableVddIO3();
+    HAL_PWREx_ConfigVddIORange(PWR_VDDIO3, PWR_VDDIO_RANGE_1V8);
   /* USER CODE END XSPI2_MspInit 1 */
 
   }

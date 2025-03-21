@@ -10,15 +10,16 @@
  *  2048 Blocks of 64KByte
  *  16 4096 byte Sectors per Block
  */
-#define MX66UM_NUM_RESERVED_SECTORS  (256)
 #define MX66UM_BLOCK_SZ              ( 64 * 1024 )
 #define MX66UM_SECTOR_SZ             ( 4  * 1024 )
+#define MX66UM_PAGE_SZ               (256)
 #define MX66UM_NUM_BLOCKS            ( 2  * 1024 )
-#define MX66UM_SECTORS_PER_BLOCK     ( 16 )
-#define MX66UM_NUM_SECTORS           ( MX66UM_NUM_BLOCKS * MX66UM_SECTORS_PER_BLOCK )
+#define MX66UM_NUM_RESERVED_SECTORS  (512)
+#define MX66UM_NUM_SECTORS_PER_BLOCK ( 16 )
+#define MX66UM_NUM_SECTORS           ( MX66UM_NUM_BLOCKS * MX66UM_NUM_SECTORS_PER_BLOCK )
 #define MX66UM_MEM_SZ_BYTES          ( 1024 * MX66UM_BLOCK_SZ )
-#define MX66UM_PROG_SIZE             (256)
-#define MX66UM_READ_SIZE             (2)
+#define MX66UM_PROG_SIZE             (MX66UM_PAGE_SZ)
+#define MX66UM_READ_SIZE             (4)
 
 #define XSPI_START_ADDRESS           ( MX66UM_NUM_RESERVED_SECTORS * MX66UM_BLOCK_SZ )
 

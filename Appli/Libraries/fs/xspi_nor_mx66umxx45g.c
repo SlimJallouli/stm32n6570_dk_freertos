@@ -1,6 +1,6 @@
 
 #include "logging_levels.h"
-#define LOG_LEVEL    LOG_ERROR
+#define LOG_LEVEL    LOG_NONE
 #include "logging.h"
 #include "FreeRTOS.h"
 #include "task.h"
@@ -31,7 +31,7 @@ static void printBufferWithAddress(uint32_t ulAddr, const void *pxBuffer, uint32
     char uartBuffer[UART_BUFFER_SIZE];
     int len;
 
-    vTaskDelay(300);
+//    vTaskDelay(300);
 
     // Print the address
     len = snprintf(uartBuffer, UART_BUFFER_SIZE, "/* Address: 0x%08X, Size:  0x%08X */\r\n", ulAddr, ulBufferLen);
@@ -150,7 +150,6 @@ BaseType_t xspi_ReadAddr    (XSPI_HandleTypeDef *pxXSPI, uint32_t ulAddr, void *
   HAL_StatusTypeDef status;
   XSPI_RegularCmdTypeDef sCommand = { 0 };
 
-  vTaskDelay(100);
   LogDebug("Reading address 0x%08X, size  0x%08X",ulAddr, ulBufferLen);
   configASSERT((ulBufferLen%2)==0);
 

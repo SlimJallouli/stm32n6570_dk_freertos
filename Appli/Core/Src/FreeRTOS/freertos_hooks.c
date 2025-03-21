@@ -86,6 +86,7 @@ void vDoSystemReset(void)
 
   /* Drain log buffers */
   vDyingGasp();
+  __BKPT(0);
   NVIC_SystemReset();
 }
 

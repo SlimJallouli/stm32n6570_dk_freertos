@@ -1240,7 +1240,7 @@ static void vCommand_PKI( ConsoleIO_t * pxCIO,
     {
         pcVerb = ppcArgv[ VERB_ARG_INDEX ];
 
-#if !defined(__USE_STSAFE__) && defined(FLEET_PROVISION_DEMO)
+#if !defined(__USE_STSAFE__) && !defined(FLEET_PROVISION_DEMO)
         if( 0 == strcmp( "generate", pcVerb ) )
         {
             if( ulArgc > OBJECT_TYPE_INDEX )

@@ -75,16 +75,37 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define MX66UM_XSPI hxspi2
 #define RunTimeStats_Timer htim5
 #define xConsoleHandle huart1
-#define MX66UM_XSPI hxspi2
+#define MXCHIP_FLOW_EXTI_IRQn EXTI15_IRQn
+#define MXCHIP_NOTIFY_EXTI_IRQn EXTI14_IRQn
+#define MXCHIP_NOTIFY_Pin GPIO_PIN_14
+#define MXCHIP_NOTIFY_GPIO_Port GPIOD
+#define ExpressLink_EVENT_Pin GPIO_PIN_0
+#define ExpressLink_EVENT_GPIO_Port GPIOD
 #define LED_GREEN_Pin GPIO_PIN_1
 #define LED_GREEN_GPIO_Port GPIOO
+#define MXCHIP_RESET_Pin GPIO_PIN_15
+#define MXCHIP_RESET_GPIO_Port GPIOF
+#define MXCHIP_FLOW_Pin GPIO_PIN_15
+#define MXCHIP_FLOW_GPIO_Port GPIOG
+#define MXCHIP_NSS_Pin GPIO_PIN_12
+#define MXCHIP_NSS_GPIO_Port GPIOB
 #define LED_RED_Pin GPIO_PIN_10
 #define LED_RED_GPIO_Port GPIOG
 
 /* USER CODE BEGIN Private defines */
+#define fleetProvisioning_STACKSIZE            configMINIMAL_STACK_SIZE
+#define DEMO_PUB_SUB       0
+#define DEMO_OTA           0
+#define DEMO_ENV_SENSOR    0
+#define DEMO_MOTION_SENSOR 0
+#define DEMO_SHADOW        0
+#define DEMO_DEFENDER      0
 
+#define democonfigMAX_THING_NAME_LENGTH 128
+#define democonfigDEVICE_PREFIX "stm32n6"
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
