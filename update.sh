@@ -48,3 +48,7 @@ rm -rf $FOLDER_PATH
 FOLDER_PATH="./Libraries/corePKCS11/test"
 echo "Deleting $FOLDER_PATH"
 rm -rf $FOLDER_PATH
+
+FOLDER_PATH="./Middlewares/Third_Party/ARM_RTOS_FreeRTOS/Source/examples/"
+echo "Deleting $FOLDER_PATH"
+rm -rf $FOLDER_PATH

@@ -111,6 +111,10 @@
 									<listOptionValue builtIn="false" value="../../Middlewares/Third_Party/ARM_Security/include/mbedcrypto/"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Core/Src/crypto}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Common/net/lwip_port/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Common/net/mxchip}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Common/app/mqtt}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries/corePKCS11/source/dependency/3rdparty/mbedtls_utils}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Core/Src/ota_pal}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.400370559" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
@@ -137,13 +141,13 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="crypto/pk_wrap_stsafe.c|sys/hal_init.c|app" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Common"/>
+						<entry excluding="app/qualification_app_main.c|app/motion_sensors_publish.c|app/env_sensor_publish.c|crypto/pk_wrap_stsafe.c|sys/hal_init.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Common"/>
+						<entry excluding="lwIP/Network/RTOS/FreeRTOS/sys_arch.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Middlewares"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Secure/FreeRTOS"/>
+						<entry excluding="FreeRTOS" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Secure"/>
+						<entry excluding="corePKCS11/source/portable|littlefs/runners|tinycbor/scripts|tinycbor/examples|tinycbor/cmake|littlefs/bd|tinycbor/src/open_memstream.c|tinycbor/tests|corePKCS11/test|tinycbor/tools" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Libraries"/>
 						<entry excluding="Src/sysmem.c|Src/crypto/core_pkcs11_pal_stsafe.c|Src/crypto/rng_alt_stm32.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Core"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
-						<entry excluding="corePKCS11/source/portable|littlefs/runners|tinycbor/scripts|tinycbor/examples|tinycbor/cmake|littlefs/bd|tinycbor/src/open_memstream.c|tinycbor/tests|corePKCS11/test|tinycbor/tools" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Libraries"/>
-						<entry excluding="lwIP/Network/RTOS/FreeRTOS/sys_arch.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Middlewares"/>
-						<entry excluding="FreeRTOS" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Secure"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Secure/FreeRTOS"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

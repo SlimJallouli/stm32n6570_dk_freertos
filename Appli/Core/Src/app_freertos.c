@@ -46,9 +46,9 @@
 
 //#include "hal_init.h"
 
-//#include "mx_netconn.h"
+#include "mx_netconn.h"
 
-//#include "mqtt_agent_task.h"
+#include "mqtt_agent_task.h"
 
 #if defined(__USE_STSAFE__)
 #include "stsafe.h"
@@ -208,11 +208,12 @@ void StartDefaultTask(void *argument)
   if (xMountStatus == LFS_ERR_OK)
   {
     LogInfo("File System mounted.");
-#if 0
+
+#if DEMO_OTA
     otaPal_EarlyInit();
+#endif
 
     (void) xEventGroupSetBits(xSystemEvents, EVT_MASK_FS_READY);
-#endif
 
 #if defined(_KVSTORE_H)
     KVStore_init();
@@ -223,11 +224,10 @@ void StartDefaultTask(void *argument)
     LogError("Failed to mount filesystem.");
   }
 #endif
-  (void) xEventGroupSetBits(xSystemEvents, EVT_MASK_FS_READY);
+//  (void) xEventGroupSetBits(xSystemEvents, EVT_MASK_FS_READY);
 
   xResult = xTaskCreate(vHeartbeatTask, "Heartbeat", 128, NULL, tskIDLE_PRIORITY, NULL);
   configASSERT(xResult == pdTRUE);
-
 #if 0
   xResult = xTaskCreate(net_main, "MxNet", 1024, NULL, 23, NULL);
   configASSERT(xResult == pdTRUE);
@@ -276,14 +276,12 @@ void StartDefaultTask(void *argument)
 #endif
 
 #if !defined(__USE_STSAFE__) && defined(FLEET_PROVISION_DEMO)
-#if 0
   if(provisioned == 0)
   {
     xResult = xTaskCreate(prvFleetProvisioningTask, "FleetProv", fleetProvisioning_STACKSIZE, NULL, tskIDLE_PRIORITY, NULL);
     configASSERT(xResult == pdTRUE);
   }
   else
-#endif
 #endif /* !defined(__USE_STSAFE__) && defined(FLEET_PROVISION_DEMO) */
   {
 #if DEMO_PUB_SUB
@@ -347,13 +345,11 @@ static void vHeartbeatTask(void *pvParameters)
 #if defined(LFS_H)
 lfs_t* pxGetDefaultFsCtx(void)
 {
-  while (pxLfsCtx == NULL)
-  {
-    LogDebug( "Waiting for FS Initialization." );
-    /* Wait for FS to be initialized */
-    vTaskDelay(1000);
-    /*TODO block on an event group bit instead */
-  }
+ LogDebug( "Waiting for FS Initialization." );
+ /* Wait for FS to be initialized */
+ /* Wait for the EVT_MASK_FS_READY bit to be set */
+ xEventGroupWaitBits( xSystemEvents, EVT_MASK_FS_READY, pdFALSE,  pdTRUE, portMAX_DELAY);
+ LogDebug( "FS Ready." );
 
   return pxLfsCtx;
 }
@@ -407,41 +403,7 @@ static int fs_init(void)
       LogError("Failed to create /ota directory.");
     }
   }
-#if 0
-  lfs_file_t xFile = { 0 };
-  int status = lfs_file_open ( &xLfsCtx, &xFile, "corePKCS11_Key.dat", LFS_O_RDWR | LFS_O_CREAT);
 
-  if(status == 0)
-  {
-    lfs_file_close( &xLfsCtx, &xFile );
-  }
-  else
-  {
-	__BKPT(0);
-  }
-
-  status = lfs_file_open ( &xLfsCtx, &xFile, "corePKCS11_PubKey.dat", LFS_O_RDWR | LFS_O_CREAT);
-
-  if(status == 0)
-  {
-    lfs_file_close( &xLfsCtx, &xFile );
-  }
-  else
-  {
-   __BKPT(0);
-  }
-
-  status = lfs_file_open ( &xLfsCtx, &xFile, "corePKCS11_CA_Certificate.dat", LFS_O_RDWR | LFS_O_CREAT);
-
-  if(status == 0)
-  {
-    lfs_file_close( &xLfsCtx, &xFile );
-  }
-  else
-  {
-   __BKPT(0);
-  }
-#endif
   if (err == 0)
   {
     /* Export the FS context */
